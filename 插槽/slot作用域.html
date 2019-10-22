@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div class="zyy">
+			<child :lists="list" :mag="msg">
+				<!-- <template slot-scope="a"> -->
+					<!-- <p v-if="a.hello.id == 1">你好啊 <span>{{a.hello.name}}</span></p> -->
+					<!-- <p>{{a.hello.name}}</p> -->
+					<!-- <p>{{a}}</p> -->
+				<!-- </template> -->
+				<template v-slot="scope">
+					<p>{{scope}}</p>
+				</template>
+			</child>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.component('child', {
+			props: ['lists', 'mag'],
+			template: `
+				<div>
+					<p v-for="(item, index) in lists" :key="index">
+						<slot :hello="(item)"></slot>
+					</p>
+					<!-- <p>
+						<slot :say="mag"></slot>
+					</p> -->
+				</div>
+			`
+			// 经过一番试验得出如果template下面有两个不同容器的插槽,下面的会覆盖上面的,而上面子组件中template的内容如果使用相应的声明属性名也是一一对照的,如果只是单单使用了插槽,那么内容就会是一样的,浪费资源
+		})
+		var vm = new Vue({
+			el: '.zyy',
+			data: {
+				msg: 'world',
+				list: [
+					{
+						id: 1,
+						name: 'zhangsan'
+					},
+					{
+						id: 2,
+						name: 'lisi'
+					},
+					{
+						id: 3,
+						name: 'wangwu'
+					}
+				]
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<style type="text/css">
+			ul{
+				list-style: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="app">
+			<child :lists="nameList">
+				<template slot-scope="scope">
+					{{scope}}
+				</template>
+			</child>
+			<button type="submit">点击</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.component('child', {
+			props:['lists'],
+			template:`
+				<div>
+					<ul>
+						<li v-for="list in lists">
+							<slot :haha="list"></slot>
+						</li>
+					</ul>
+				</div>
+				`
+		})
+		let vm = new Vue({
+			el: '.app',
+			data: {
+				nameList: [
+					{id:1, name:'aaa'},
+					{id:2, name:'bbb'},
+					{id:3, name:'ccc'},
+					{id:4, name:'ddd'}
+				]
+			}
+		})
+	</script>
+</html>

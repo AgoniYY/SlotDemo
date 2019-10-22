@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="js/sku.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="one-classfy" v-for="(item, index) in mainSKUList" :key="index">
+			<p class="title-name">{{item.name}}</p>
+			<button v-for="(el, i) in childSKUList[item.id]" :key="i" :class="el.checked ? 'selectActive' : ''" @click="checkSingleChildSpec(el, index, i)" :disabled="el.disabled">
+				{{el.childsSpecName}}
+			</button>
+		</div>
+	</body>
+</html>

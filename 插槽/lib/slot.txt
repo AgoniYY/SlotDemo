@@ -1,0 +1,20 @@
+我们都知道vue slot插槽可以传递任何属性或html元素
+但是在调用组件的页面中我们可以使用 template scope="props"来获取插槽上的属性值
+获取到的值是一个对象。
+
+******
+slot-scope="它可以取任意字符串";相当于声明了一个变量接受了插槽所表达的值
+
+name： 具名插槽，在父组件里通过指定的name体现子组件中插槽书写的内容
+例如： 
+	子组件child中：
+		<slot name="boy"></slot>
+	父组件： 
+		<child>
+			<template slot="boy">
+				
+			</template>
+		</child>
+作用域插槽： 
+	子组件内使用插槽，声明属性名接收数据，父组件里使用template v-slot=“一个名称（随意）”
+	里面的标签内渲染数据
